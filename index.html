@@ -3,24 +3,31 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Product App</title>
+
+    <link rel="stylesheet" href="product_style.css">
 </head>
 <body>
     
+    <div class="nav-bar"></div>
+
     <div id="app">
+        <div class="product">
 
-        <!-- Change 'Product goes here' to a placeholder ({{ product }})for the data that will populate from js file. -->
-        <h1>{{ product }}</h1>
+            <!-- Added a class for product-image that includes a img tag referencing a source -->
+            <div class="product-image">
 
-        <!-- I added the description to the object and called it. -->
-        <h1>{{ description }}</h1>
-        
-        <!-- Added a second header with the same element.  When I update value of product in the on main.js, it will update everywhere I add {{ product }} -->
-        <h2>I love my {{ product }}.</h2>
-        
-        <!-- I added a description in the object and called it in the DOM.  I used it to describe the product. -->
-        <h2>I love my {{ description }} {{ product }}.</h2>
+                <!-- Created a v-bind directory to bind the attribuate to an expression.  The expression will call the data object for the value of the image.  -->
+                <img v-bind:src="image">
+            </div>
+
+            <!-- Created a div that includes prodcut within  an h1 tag -->
+            <div class="product-info">
+                <h1>{{ product }}</h1>
+            </div>
+            
+        </div>
     </div>
-
+        
     <!-- Add script that will install Vue onto HTML page -->
     <script src="https://cdn.jsdelivr.net/npm/vue"></script>
     <script src="main.js"></script>
