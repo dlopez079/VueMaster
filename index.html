@@ -3,6 +3,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Product App</title>
+
+    <link rel="stylesheet" href="product_style.css">
 </head>
 <body>
     
@@ -11,8 +13,18 @@
     <div id="app">
         <div class="product">
 
-            <div class="product-image"></div>
-            <h1>{{ product }}</h1>
+            <!-- Added a class for product-image that includes a img tag referencing a source -->
+            <div class="product-image">
+
+                <!-- Created a v-bind directory to bind the attribuate to an expression.  The expression will call the data object for the value of the image.  -->
+                <img v-bind:src="image">
+            </div>
+
+            <!-- Created a div that includes prodcut within  an h1 tag -->
+            <div class="product-info">
+                <h1>{{ product }}</h1>
+            </div>
+            
         </div>
     </div>
         
