@@ -23,6 +23,10 @@
             <!-- Created a div that includes prodcut within  an h1 tag -->
             <div class="product-info">
                 <h1>{{ product }}</h1>
+
+                <!-- I want to display whether or not our product is "IN STOCK" OR "OUT OF STOCK".  To do this we have to render data from main using an if/else.  If you don't use the if/else, both elements below will show. The 'v-if' is going to check 'inStock' to see if it's true or false on main.js. -->
+                <p v-if="inStock">In Stock</p>
+                <p v-else>Out of Stock</p>
             </div>
             
         </div>
