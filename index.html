@@ -29,6 +29,9 @@
                 <p v-else-if="inventory <= 10 && inventory > 0">Almost Sold Out!</p> 
                 <p v-else>Out of Stock</p>
 
+                <!-- v-show is a perferred method of displaying a boolean on the page.  Below we use v-show to display whether or not the product is on sale.  You do not have to provide an else nor do I need to see if the product does 'not' have a sale.  -->
+                <p v-show='onSale'>On Sale!</p>
+
 
             </div>
             
