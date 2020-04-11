@@ -38,8 +38,12 @@
                     <p> {{ variant.variantColor }} </p>
                 </div>
 
-                <div v-for="size in sizes">
-                    <p> {{ size }} </p>
+                <!-- Added Button so we can add to cart.  We will implement v-on:click so when we click on the button, it will increment the cart div by 1 -->
+                <button v-on:click="cart += 1">Add to Cart</button>
+
+                <!-- Added cart div to display cart data -->
+                <div class="cart">
+                    <p>Cart({{cart}})</p>
                 </div>
 
             </div>
