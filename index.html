@@ -35,7 +35,9 @@
 
                 <!-- Inseerted a v-for to gather all strings from variants object -->
                 <div v-for="variant in variants" :key="variant.variantId">
-                    <p> {{ variant.variantColor }} </p>
+
+                    <!-- '@' is short for 'v-on'.  We use 'mouseover' so when the user mouses over the colors, the image will change to the propriete color image. -->
+                    <p @mouseover="updateProduct(variant.variantImage)"> {{ variant.variantColor }} </p>
                 </div>
 
                 <!-- Added Button so we can add to cart.  We will implement v-on:click so when we click on the button, it will increment the cart div by 1 -->
