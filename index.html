@@ -22,7 +22,9 @@
 
             <!-- Created a div that includes prodcut within  an h1 tag -->
             <div class="product-info">
-                <h1>{{ product }}</h1>
+
+                <!-- Insert the Brand name along with the product.  You can do this by combining the two properties in the data object.  I will create a name title and create a function within the computed object that will combine both brand and product. -->
+                <h1>{{ title }}</h1>
 
                 <!-- I want to display whether or not our product is "IN STOCK" OR "OUT OF STOCK".  To do this we have to render data from main using an if/else.  If you don't use the if/else, both elements below will show. The 'v-if' is going to check 'inStock' to see if it's true or false on main.js.  You can also check for quantity of an item as well as a boolean -->
                 <p v-if="inStock">In Stock</p>
@@ -36,26 +38,27 @@
                     <li v-for="detail in details"> {{ detail }} </li>
                 </ul>
 
-                <!-- Inseerted a v-for to gather all strings from variants object -->
+                <!-- Inserted a v-for to gather all strings from variants object -->
                 <!-- Added a class 'color-box' so we can pull styles from CSS file.  Then we will v-bind to the colors in data object in main.js -->
                 <div v-for="variant in variants" 
-                :key="variant.variantId"
-                class="color-box"
-                :style="{ backgroundColor: variant.variantColor }"
-                @mouseover="updateProduct(variant.variantImage)" >
+                    :key="variant.variantId"
+                    class="color-box"
+                    :style="{ backgroundColor: variant.variantColor }"
+                    @mouseover="updateProduct(variant.variantImage)" 
+                >
                 </div>
 
                 <!-- Added Button so we can add to cart.  We will implement v-on:click so when we click on the button, it will increment the cart div by 1 -->
                 <!-- Added a disabled feature which will disable the button when there are no items in stock. I also added a disabled button class so CSS can change the view of the button so it displays disabled. -->
                 <button v-on:click="addToCart"
-                :disabled="!inStock"
-                :class="{ disabledButton: !inStock }"
+                    :disabled="!inStock"
+                    :class="{ disabledButton: !inStock }"
                 >Add to Cart</button>
 
                 <!-- Create a new button and use v-on to trigger a method that decrements the value of cart. -->
                 <button v-on:click="subToCart"
-                :disabled="!inStock"
-                :class="{ disabledButton: !inStock }"
+                    :disabled="!inStock"
+                    :class="{ disabledButton: !inStock }"
                 >Remove</button>
 
                 <!-- Added cart div to display cart data -->
