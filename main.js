@@ -3,6 +3,7 @@ var app = new Vue({
     el: '#app',
     data: {
         product: 'Socks',
+        brand: 'Vue Mastery',
         image: './assets/vmSocks-green.jpg',
         inStock: true,
         onSale: true,
@@ -31,6 +32,11 @@ var app = new Vue({
         },
         updateProduct: function(variantImage) {
             this.image = variantImage
+        }
+    },
+    computed: {
+        title: function() {
+            return this.brand + ' ' + this.product
         }
     }
 })
