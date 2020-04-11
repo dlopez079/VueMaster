@@ -25,13 +25,18 @@
                 <h1>{{ product }}</h1>
 
                 <!-- I want to display whether or not our product is "IN STOCK" OR "OUT OF STOCK".  To do this we have to render data from main using an if/else.  If you don't use the if/else, both elements below will show. The 'v-if' is going to check 'inStock' to see if it's true or false on main.js.  You can also check for quantity of an item as well as a boolean -->
-                <p v-if="inventory > 10">In Stock</p>
-                <p v-else-if="inventory <= 10 && inventory > 0">Almost Sold Out!</p> 
+                <p v-if="inStock">In Stock</p>
                 <p v-else>Out of Stock</p>
 
-                <!-- v-show is a perferred method of displaying a boolean on the page.  Below we use v-show to display whether or not the product is on sale.  You do not have to provide an else nor do I need to see if the product does 'not' have a sale.  -->
-                <p v-show='onSale'>On Sale!</p>
+                <!-- Inserted a v-for to gather all strings from details array -->
+                <ul>
+                    <li v-for="detail in details"> {{ detail }} </li>
+                </ul>
 
+                <!-- Inseerted a v-for to gather all strings from variants object -->
+                <div v-for="variant in variants" :key="variant.variantId">
+                    <p> {{ variant.variantColor }} </p>
+                </div>
 
             </div>
             
