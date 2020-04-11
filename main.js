@@ -30,13 +30,17 @@ var app = new Vue({
         subToCart: function() {
             this.cart -= 1
         },
-        updateProduct: function(variantImage) {
-            this.image = variantImage
+        updateProduct: function(index) {
+            this.selectedVariant = index
+            console.log(index)
         }
     },
     computed: {
         title: function() {
             return this.brand + ' ' + this.product
+        },
+        image() {
+            return this.variants[this.selectedVariant].variantImage
         }
     }
 })
