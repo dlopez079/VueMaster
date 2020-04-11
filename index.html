@@ -26,7 +26,10 @@
 
                 <!-- I want to display whether or not our product is "IN STOCK" OR "OUT OF STOCK".  To do this we have to render data from main using an if/else.  If you don't use the if/else, both elements below will show. The 'v-if' is going to check 'inStock' to see if it's true or false on main.js.  You can also check for quantity of an item as well as a boolean -->
                 <p v-if="inStock">In Stock</p>
-                <p v-else>Out of Stock</p>
+
+                <!-- When inStock is false, bind a class to the "Out of Stock" p tag that adds: text-decoration: line-through. -->
+                <p v-else
+                :class=" { outOfStock: !inStock } ">Out of Stock</p> 
 
                 <!-- Inserted a v-for to gather all strings from details array -->
                 <ul>
