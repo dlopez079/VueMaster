@@ -46,11 +46,14 @@
                 <!-- Added a disabled feature which will disable the button when there are no items in stock. I also added a disabled button class so CSS can change the view of the button so it displays disabled. -->
                 <button v-on:click="addToCart"
                 :disabled="!inStock"
-                class="{disabledButton: !inStock }"
+                :class="{ disabledButton: !inStock }"
                 >Add to Cart</button>
 
                 <!-- Create a new button and use v-on to trigger a method that decrements the value of cart. -->
-                <button v-on:click="subToCart">Remove</button>
+                <button v-on:click="subToCart"
+                :disabled="!inStock"
+                :class="{ disabledButton: !inStock }"
+                >Remove</button>
 
                 <!-- Added cart div to display cart data -->
                 <div class="cart">
