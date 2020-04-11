@@ -33,6 +33,9 @@
                 <p v-else
                 :class=" { outOfStock: !inStock } ">Out of Stock</p> 
 
+                <!-- Insert if product is on sale or not. -->
+                <p>{{ sale }}</p>
+
                 <!-- Inserted a v-for to gather all strings from details array -->
                 <ul>
                     <li v-for="detail in details"> {{ detail }} </li>
