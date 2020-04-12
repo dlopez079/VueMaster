@@ -1,5 +1,11 @@
 //Create a component
 Vue.component('product', {
+    props: {
+        premium: {
+            type: Boolean,
+            required: true
+        }
+    },
     template: `
     <div class="product">
 
@@ -125,6 +131,9 @@ Vue.component('product', {
 //Create a new vue instance, tag the element with the ID of 'app', and give it data.  
 var app = new Vue({
     el: '#app',
+    data: {
+        premium: true
+    }
 })
 
 
