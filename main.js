@@ -32,6 +32,9 @@ Vue.component('product', {
                 <!-- Insert if product is on sale or not. -->
                 <p>{{ sale }}</p>
 
+                <!-- Insert p tag displaying where user is premium or not -->
+                <p>Shipping: {{shipping}} </p>
+
                 <!-- Inserted a v-for to gather all strings from details array -->
                 <ul>
                     <li v-for="detail in details"> {{ detail }} </li>
@@ -123,6 +126,12 @@ Vue.component('product', {
                 return this.brand + ' ' + this.product + ' are on sale!'
             }
                 return this.brand + ' ' + this.product + ' are not on sale'
+        },
+        shipping() {
+            if (this.premium) {
+                return "Free"
+            }
+            return 2.99
         }
     }
     
@@ -132,7 +141,7 @@ Vue.component('product', {
 var app = new Vue({
     el: '#app',
     data: {
-        premium: true
+        premium: false
     }
 })
 
