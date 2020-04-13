@@ -187,6 +187,13 @@ Vue.component('productDetails', {
     }
 })
 
+Vue.component('comp1', {
+    template: `<div>This is component 1!</div>`
+})
+
+Vue.component('comp2', {
+    template: `<div>This is component 2!</div>`
+})
 //Create a new '(ROOT VUE INSTANCE', tag the element with the ID of 'app', and give it data.  
 var app = new Vue({
     el: '#app',
