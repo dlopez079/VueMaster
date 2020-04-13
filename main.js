@@ -1,10 +1,12 @@
-//Create a component
+
+
+//Create a 'COMPONENT' called 'Product'
 Vue.component('product', {
     props: {
         premium: {
             type: Boolean,
             required: true
-        }
+        },
     },
     template: `
     <div class="product">
@@ -137,14 +139,75 @@ Vue.component('product', {
     
 })
 
-//Create a new vue instance, tag the element with the ID of 'app', and give it data.  
-var app = new Vue({
-    el: '#app',
-    data: {
-        premium: false
+//Create a 'COMPONENT' called 'productDetails'
+Vue.component('productDetails', {
+    props: {
+        details: {
+            type: Boolean,
+            required: true
+        }
+    },
+    template: `
+        <div class="productDetails">
+            //Our component template will go here.
+            <p>Product Details: {{details}}</p>
+        </div>
+    `,
+    data() {
+        return {
+            //all data goes here
+            product: 'Socks',
+            brand: 'Vue Mastery',
+            selectedVariant: 0,
+            onSale: true,
+            details: ["80% cotton", "20% polyester", "Gender-neutral"],
+            variants: [
+                {
+                    variantId: 2234,
+                    variantColor: "green",
+                    variantImage: "./assets/vmSocks-green.jpg",
+                    variantQuantity: 10
+                }, 
+                {
+                    variantId: 2235,
+                    variantColor: "blue",
+                    variantImage: "./assets/vmSocks-blue.jpg",
+                    variantQuantity: 0
+                }
+            ],
+            sizes: ["Small", "Medium", "Large"],
+            cart: 0,
+        }
+    },
+    methods() {
+        //all methods go here
+    },
+    computed() {
+        //computed properties go here.
     }
 })
 
+Vue.component('comp1', {
+    template: `<div>This is component 1!</div>`
+})
+
+Vue.component('comp2', {
+    template: `<div>This is component 2!</div>`
+})
+//Create a new '(ROOT VUE INSTANCE', tag the element with the ID of 'app', and give it data.  
+var app = new Vue({
+    el: '#app',
+    data: {
+        premium: false,
+        details: true
+    }
+})
+
+// Below is a template for components
+// Vue.component('ComponentName', {
+//     props: [propsOption],
+//     template:"<div>{{propsOption}}</div>"
+// })
 
 
 
