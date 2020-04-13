@@ -6,7 +6,7 @@ Vue.component('product', {
         premium: {
             type: Boolean,
             required: true
-        }
+        },
     },
     template: `
     <div class="product">
