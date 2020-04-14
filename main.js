@@ -98,7 +98,7 @@ Vue.component('product', {
                 }
             ],
             sizes: ["Small", "Medium", "Large"],
-            cart: 0,
+            
         }
     },
     methods: {
@@ -144,6 +144,7 @@ var app = new Vue({
     el: '#app',
     data: {
         premium: true,
+        cart: 0,
     }
 })
 
