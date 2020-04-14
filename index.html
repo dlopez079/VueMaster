@@ -18,7 +18,7 @@
         </div>
 
         <!-- Product Component -->
-        <product :premium='premium'></product>
+        <product :premium='premium' @add-to-cart="updateCart" @sub-to-cart="removeCart"></product>
     </div>
         
     <!-- Add script that will install Vue onto HTML page -->
