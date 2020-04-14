@@ -66,11 +66,6 @@ Vue.component('product', {
                     :class="{ disabledButton: !inStock }"
                 >Remove</button>
 
-                <!-- Added cart div to display cart data -->
-                <div class="cart">
-                    <p>Cart({{cart}})</p>
-                </div>
-
             </div>
             
         </div>
@@ -103,10 +98,10 @@ Vue.component('product', {
     },
     methods: {
         addToCart: function() {
-            this.cart += 1
+            this.$emit("add-to-cart")
         },
         subToCart: function() {
-            this.cart -= 1
+            this.$emit("sub-to-cart")
         },
         updateProduct: function(index) {
             this.selectedVariant = index
@@ -143,8 +138,16 @@ Vue.component('product', {
 var app = new Vue({
     el: '#app',
     data: {
-        premium: true,
-        cart: 0,
+        premium: false,
+        cart: 0
+    },
+    methods: {
+        updateCart() {
+            this.cart +=1
+        },
+        removeCart() {
+            this.cart -=1
+        }
     }
 })
 
