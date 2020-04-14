@@ -14,11 +14,11 @@
 
         <!-- Added cart div to display cart data -->
         <div class="cart">
-            <p>Cart({{cart}})</p>
+            <p>Cart({{ cart.length }})</p>
         </div>
 
         <!-- Product Component -->
-        <product :premium='premium' @add-to-cart="updateCart" @sub-to-cart="removeCart"></product>
+        <product :premium='premium' @add-to-cart="updateCart" @sub-to-cart="removeItem"></product>
     </div>
         
     <!-- Add script that will install Vue onto HTML page -->
