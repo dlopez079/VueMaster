@@ -67,7 +67,7 @@ Vue.component('product', {
                 >Remove</button>
 
                 <!-- Nest the product review component inside the product component -->
-                <product-review></product-review>
+                <product-review @review-submitted="addReview"></product-review>
 
             </div>
             
@@ -109,6 +109,9 @@ Vue.component('product', {
         updateProduct: function(index) {
             this.selectedVariant = index
             console.log(index)
+        },
+        addReview(productReview) {
+            this.reviews.push(productReview)
         }
     },
     computed: {
@@ -175,16 +178,19 @@ Vue.component('product-review', {
             rating: null
         }
     },
-    onSubmit() {
-        let productReview = {
-          name: this.name,
-          review: this.review,
-          rating: this.rating
-        }
-        this.name = null
-        this.review = null
-        this.rating = null
-      }
+    methods: {
+        onSubmit() {
+            let productReview = {
+              name: this.name,
+              review: this.review,
+              rating: this.rating
+            }
+            this.$emit('review-submitted', productReview)
+            this.name = null
+            this.review = null
+            this.rating = null
+          }
+    }
 })
 
 //Create a new '(ROOT VUE INSTANCE', tag the element with the ID of 'app', and give it data.  
