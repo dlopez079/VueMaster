@@ -238,6 +238,15 @@ Vue.component('product-review', {
     }
 })
 
+//Create a 'COMPONENT called 'product-tabs".  This component will be nested at the bottom of the 'PRODUCT' component.
+Vue.component('product-tabs', {
+    template: `
+    <div>
+        <span class="tab" v-for="(tab, index) in tabs" :key="index"> {{ tab }} </span>
+    </div>
+    `
+})
+
 //Create a new '(ROOT VUE INSTANCE', tag the element with the ID of 'app', and give it data.  
 var app = new Vue({
     el: '#app',
