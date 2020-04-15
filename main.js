@@ -181,6 +181,14 @@ Vue.component('product-review', {
             <p>
                 <input type="submit" value="Submit">  
             </p>    
+
+            <!-- Error message if fields are not populated -->
+            <p v-if="errors.length">
+                <b>Please correct the following error(s):</b>
+                <ul>
+                    <li v-for="error in errors">{{ error }}</li>
+                </ul>
+            </p>
         
         </form> 
     `,
@@ -189,21 +197,28 @@ Vue.component('product-review', {
             name: null,
             review: null,
             rating: null,
-            errors: [] //Added an array of errors for the customer form validation
+            errors: [] //Added an array of errors for the custom form validation
         }
     },
     methods: {
         onSubmit() {
-            let productReview = {
-              name: this.name,
-              review: this.review,
-              rating: this.rating
+            //Add a conditional to check if the fields have input
+            if(this.name && this.review && this.rating) {
+                let productReview = {
+                    name: this.name,
+                    review: this.review,
+                    rating: this.rating
+                  }
+                  this.$emit('review-submitted', productReview) //To send the productReview object up, we use the $emit function called review-submitted so we can sent up this object to the parent component.
+                  this.name = null
+                  this.review = null
+                  this.rating = null
+            } else {  //If the fields doe not have input, shoot out the appropriate strings
+                if(!this.name) this.errors.push("Name required.")
+                if(!this.review) this.errors.push("Review required.")
+                if(!this.rating) this.errors.push("Rating required.")
             }
-            this.$emit('review-submitted', productReview) //To send the productReview object up, we use the $emit function called review-submitted so we can sent up this object to the parent component.
-            this.name = null
-            this.review = null
-            this.rating = null
-          }
+          } 
     }
 })
 
