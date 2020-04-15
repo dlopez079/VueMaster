@@ -137,7 +137,7 @@ Vue.component('product', {
 //Create a 'COMPONENT' called 'product-review'
 Vue.component('product-review', {
     template: `
-    <input> 
+    <input v-model="name> 
     `,
     data() {
         return {
