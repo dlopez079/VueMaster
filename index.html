@@ -11,10 +11,14 @@
     <div class="nav-bar"></div>
 
     <div id="app">
-        <product :premium='premium' :details='details'></product>
-        <productdetails :details='details'></productdetails>
-        <comp1></comp1>
-        <comp2></comp2>
+
+        <!-- Added cart div to display cart data -->
+        <div class="cart">
+            <p>Cart({{ cart.length }})</p>
+        </div>
+
+        <!-- Product Component -->
+        <product :premium='premium' @add-to-cart="updateCart" @sub-to-cart="removeItem"></product>
     </div>
         
     <!-- Add script that will install Vue onto HTML page -->

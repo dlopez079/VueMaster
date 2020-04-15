@@ -66,11 +66,6 @@ Vue.component('product', {
                     :class="{ disabledButton: !inStock }"
                 >Remove</button>
 
-                <!-- Added cart div to display cart data -->
-                <div class="cart">
-                    <p>Cart({{cart}})</p>
-                </div>
-
             </div>
             
         </div>
@@ -98,15 +93,15 @@ Vue.component('product', {
                 }
             ],
             sizes: ["Small", "Medium", "Large"],
-            cart: 0,
+            
         }
     },
     methods: {
         addToCart: function() {
-            this.cart += 1
+            this.$emit("add-to-cart", this.variants[this.selectedVariant].variantId)
         },
         subToCart: function() {
-            this.cart -= 1
+            this.$emit("sub-to-cart", this.variants[this.selectedVariant].variantId)
         },
         updateProduct: function(index) {
             this.selectedVariant = index
@@ -139,67 +134,36 @@ Vue.component('product', {
     
 })
 
-//Create a 'COMPONENT' called 'productDetails'
-Vue.component('productDetails', {
-    props: {
-        details: {
-            type: Boolean,
-            required: true
-        }
-    },
+//Create a 'COMPONENT' called 'product-review'
+Vue.component('product-review', {
     template: `
-        <div class="productDetails">
-            //Our component template will go here.
-            <p>Product Details: {{details}}</p>
-        </div>
+    <input> 
     `,
     data() {
         return {
-            //all data goes here
-            product: 'Socks',
-            brand: 'Vue Mastery',
-            selectedVariant: 0,
-            onSale: true,
-            details: ["80% cotton", "20% polyester", "Gender-neutral"],
-            variants: [
-                {
-                    variantId: 2234,
-                    variantColor: "green",
-                    variantImage: "./assets/vmSocks-green.jpg",
-                    variantQuantity: 10
-                }, 
-                {
-                    variantId: 2235,
-                    variantColor: "blue",
-                    variantImage: "./assets/vmSocks-blue.jpg",
-                    variantQuantity: 0
-                }
-            ],
-            sizes: ["Small", "Medium", "Large"],
-            cart: 0,
+            name: null
         }
-    },
-    methods() {
-        //all methods go here
-    },
-    computed() {
-        //computed properties go here.
     }
 })
 
-Vue.component('comp1', {
-    template: `<div>This is component 1!</div>`
-})
-
-Vue.component('comp2', {
-    template: `<div>This is component 2!</div>`
-})
 //Create a new '(ROOT VUE INSTANCE', tag the element with the ID of 'app', and give it data.  
 var app = new Vue({
     el: '#app',
     data: {
         premium: false,
-        details: true
+        cart: []
+    },
+    methods: {
+        updateCart(id) {
+            this.cart.push(id)
+        },
+        removeItem(id) {
+            for(var i = this.cart.length - 1; i >= 0; i--) {
+              if (this.cart[i] === id) {
+                 this.cart.splice(i, 1);
+              }
+            }
+          }
     }
 })
 
