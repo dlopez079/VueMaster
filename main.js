@@ -159,7 +159,7 @@ Vue.component('product-review', {
         <form class="review-form" @submit.prevent="onSubmit">
             <p>
                 <label for="name">Name:</label>
-                <input required id="name" v-model="name" placeholder="name">
+                <input id="name" v-model="name" placeholder="name">
             </p>
             
             <p>
@@ -188,7 +188,8 @@ Vue.component('product-review', {
         return {
             name: null,
             review: null,
-            rating: null
+            rating: null,
+            errors: [] //Added an array of errors for the customer form validation
         }
     },
     methods: {
