@@ -134,6 +134,18 @@ Vue.component('product', {
     
 })
 
+//Create a 'COMPONENT' called 'product-review'
+Vue.component('product-review', {
+    template: `
+    <input> 
+    `,
+    data() {
+        return {
+            name: null
+        }
+    }
+})
+
 //Create a new '(ROOT VUE INSTANCE', tag the element with the ID of 'app', and give it data.  
 var app = new Vue({
     el: '#app',
