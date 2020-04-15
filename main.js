@@ -66,6 +66,9 @@ Vue.component('product', {
                     :class="{ disabledButton: !inStock }"
                 >Remove</button>
 
+                <!-- Nest your product tabs here ->
+                <product-tabs></product-tabs>
+
                 <!-- We are creating a list of our reviews with v-for and printing them out using dot notation, since each review is an object-->
                 <div>
                     <h2>Reviews</h2>
@@ -242,9 +245,20 @@ Vue.component('product-review', {
 Vue.component('product-tabs', {
     template: `
     <div>
-        <span class="tab" v-for="(tab, index) in tabs" :key="index"> {{ tab }} </span>
+        <span class="tab" 
+        v-for="(tab, index) in tabs" 
+        @click="selectedTab = tab" //sets value of selectedTab in data
+        :class="{ activeTab: selectedTab === tab }"
+        > {{ tab }} </span>
     </div>
-    `
+    `,
+    //In our data, we have a tabs array with strings that we’re using as the titles for each tab. In the template, we’re using v-for to create a span for each string from our tabs array.
+    data() {
+        return {
+            tabs: ["Reviews", "Make a Review"],
+            selectedTab: "Reviews" // Set from @click
+        }
+    }
 })
 
 //Create a new '(ROOT VUE INSTANCE', tag the element with the ID of 'app', and give it data.  
