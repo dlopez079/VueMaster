@@ -1,4 +1,5 @@
-
+//Create a 'NEW VUE INSTANCE' called 'eventBus'.  This needs to be at the top (or beginning of all code because it is a global instance)
+var eventBus = new Vue()
 
 //Create a 'COMPONENT' called 'Product'
 Vue.component('product', {
@@ -66,25 +67,9 @@ Vue.component('product', {
                     :class="{ disabledButton: !inStock }"
                 >Remove</button>
 
-                <!-- Nest your product tabs here ->
-                <product-tabs></product-tabs>
-
-                <!-- We are creating a list of our reviews with v-for and printing them out using dot notation, since each review is an object-->
-                <div>
-                    <h2>Reviews</h2>
-                    <p v-if="!reviews.length">There are no reviews yet.</p>
-                    <ul>
-                    <li v-for="review in reviews">
-                    <p>{{ review.name }}</p>
-                    <p>Recommend: {{review.recommend }} </p>
-                    <p>Rating: {{ review.rating }}</p>
-                    <p>{{ review.review }}</p>
-                    </li>
-                    </ul>
-                </div>
-
-                <!-- Nest the product review component inside the product component -->
-                <product-review @review-submitted="addReview"></product-review>
+                <!-- Nest your product tabs here -->
+                <product-tabs :reviews="reviews"></product-tabs>
+               
 
             </div>
             
@@ -127,9 +112,6 @@ Vue.component('product', {
             this.selectedVariant = index
             console.log(index)
         },
-        addReview(productReview) {
-            this.reviews.push(productReview)
-        }
     },
     computed: {
         title: function() {
@@ -153,6 +135,11 @@ Vue.component('product', {
             }
             return 2.99
         }
+    },
+    mounted() {
+        eventBus.$on('review-submitted', productReview => {
+            this.reviews.push(productReview)
+        })
     }
     
 })
@@ -226,7 +213,7 @@ Vue.component('product-review', {
                     rating: this.rating,
                     recommend: this.recommend
                   }
-                  this.$emit('review-submitted', productReview) //To send the productReview object up, we use the $emit function called review-submitted so we can sent up this object to the parent component.
+                  eventBus.$emit('review-submitted', productReview)
                   this.name = null
                   this.review = null
                   this.rating = null
@@ -243,22 +230,47 @@ Vue.component('product-review', {
 
 //Create a 'COMPONENT called 'product-tabs".  This component will be nested at the bottom of the 'PRODUCT' component.
 Vue.component('product-tabs', {
+    props: {
+        reviews: {
+          type: Array,
+          required: true
+        },
+      },
     template: `
-    <div>
-        <span class="tab" 
-        v-for="(tab, index) in tabs" 
-        @click="selectedTab = tab" //sets value of selectedTab in data
-        :class="{ activeTab: selectedTab === tab }"
-        > {{ tab }} </span>
-    </div>
+        <div>
+          <span class="tab" 
+            :class="{ activeTab: selectedTab === tab}"
+            v-for="(tab, index) in tabs" 
+            :key="index"
+            @click="selectedTab = tab" 
+          > {{ tab }} </span>
+
+          <div v-show="selectedTab === 'Reviews'">
+            <p v-if="!reviews.length">There are no reviews yet.</p>
+            <ul>
+                <li v-for="review in reviews">
+                    <p>{{ review.name }}</p>
+                    <p>Recommend: {{review.recommend }} </p>
+                    <p>Rating: {{ review.rating }}</p>
+                    <p>{{ review.review }}</p>
+                </li>
+            </ul>
+          </div>
+
+          <div v-show="selectedTab === 'Make a Review'">
+            <product-review></product-review>
+          </div>
+
+        </div>
+
+        
     `,
-    //In our data, we have a tabs array with strings that we’re using as the titles for each tab. In the template, we’re using v-for to create a span for each string from our tabs array.
     data() {
         return {
-            tabs: ["Reviews", "Make a Review"],
-            selectedTab: "Reviews" // Set from @click
+          tabs: ['Reviews', 'Make a Review'],
+          selectedTab: 'Reviews'      
         }
-    }
+      } 
 })
 
 //Create a new '(ROOT VUE INSTANCE', tag the element with the ID of 'app', and give it data.  
@@ -287,6 +299,7 @@ var app = new Vue({
 //     props: [propsOption],
 //     template:"<div>{{propsOption}}</div>"
 // })
+
 
 
 
