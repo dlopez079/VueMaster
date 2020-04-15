@@ -66,12 +66,16 @@ Vue.component('product', {
                     :class="{ disabledButton: !inStock }"
                 >Remove</button>
 
-                <!-- Created a div for reviews-->
+                <!-- We are creating a list of our reviews with v-for and printing them out using dot notation, since each review is an object-->
                 <div>
                     <h2>Reviews</h2>
-                    <p>There are no reviews yet.</p>
+                    <p v-if="!reviews.length">There are no reviews yet.</p>
                     <ul>
-                        <li v-for="review in reviews> {{ review }} </li>
+                    <li v-for="review in reviews">
+                    <p>{{ review.name }}</p>
+                    <p>Rating: {{ review.rating }}</p>
+                    <p>{{ review.review }}</p>
+                    </li>
                     </ul>
                 </div>
 
