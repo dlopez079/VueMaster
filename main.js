@@ -66,6 +66,15 @@ Vue.component('product', {
                     :class="{ disabledButton: !inStock }"
                 >Remove</button>
 
+                <!-- Created a div for reviews-->
+                <div>
+                    <h2>Reviews</h2>
+                    <p>There are no reviews yet.</p>
+                    <ul>
+                        <li v-for="review in reviews> {{ review }} </li>
+                    </ul>
+                </div>
+
                 <!-- Nest the product review component inside the product component -->
                 <product-review @review-submitted="addReview"></product-review>
 
@@ -96,7 +105,7 @@ Vue.component('product', {
                 }
             ],
             sizes: ["Small", "Medium", "Large"],
-            
+            reviews: []
         }
     },
     methods: {
@@ -185,7 +194,7 @@ Vue.component('product-review', {
               review: this.review,
               rating: this.rating
             }
-            this.$emit('review-submitted', productReview)
+            this.$emit('review-submitted', productReview) //To send the productReview object up, we use the $emit function called review-submitted so we can sent up this object to the parent component.
             this.name = null
             this.review = null
             this.rating = null
